@@ -34,7 +34,7 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const API_BASE_URL = 'http://localhost:8000'; // Update with your backend URL
+  const API_BASE_URL = import.meta.env.VITE_BASE_API_URL || "http//localhost://8081";
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -79,7 +79,7 @@ const Register = () => {
       alert('Please enter phone number first');
       return;
     }
-    
+
     if (!formData.phoneNumber.match(/^[0-9]{10}$/)) {
       alert('Please enter a valid 10-digit phone number');
       return;
@@ -164,7 +164,7 @@ const Register = () => {
       alert('Please enter email address first');
       return;
     }
-    
+
     if (!formData.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
       alert('Please enter a valid email address');
       return;
@@ -197,9 +197,9 @@ const Register = () => {
     try {
       // Verify Email OTP - using query parameters
       await axios.post(`${API_BASE_URL}/otp/verify-email`, null, {
-        params: { 
-          email: formData.email, 
-          otp: formData.emailOtp 
+        params: {
+          email: formData.email,
+          otp: formData.emailOtp
         }
       });
       setIsEmailVerified(true);
@@ -244,69 +244,70 @@ const Register = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    navigate("/alumnidashboard")
+    // e.preventDefault();
 
-    // Validate passwords
-    if (formData.password !== formData.confirmPassword) {
-      setPasswordError('Passwords do not match');
-      return;
-    }
+    // // Validate passwords
+    // if (formData.password !== formData.confirmPassword) {
+    //   setPasswordError('Passwords do not match');
+    //   return;
+    // }
 
-    if (formData.password && formData.password.length < 6) {
-      setPasswordError('Password must be at least 6 characters');
-      return;
-    }
+    // if (formData.password && formData.password.length < 6) {
+    //   setPasswordError('Password must be at least 6 characters');
+    //   return;
+    // }
 
-    // Check if phone is verified
-    if (!isPhoneVerified) {
-      alert('Please verify your phone number first');
-      return;
-    }
+    // // Check if phone is verified
+    // if (!isPhoneVerified) {
+    //   alert('Please verify your phone number first');
+    //   return;
+    // }
 
-    // Check if email is verified
-    if (!isEmailVerified) {
-      alert('Please verify your email address first');
-      return;
-    }
+    // // Check if email is verified
+    // if (!isEmailVerified) {
+    //   alert('Please verify your email address first');
+    //   return;
+    // }
 
-    if (!formData.termsAccepted) {
-      alert('Please accept the terms and conditions');
-      return;
-    }
+    // if (!formData.termsAccepted) {
+    //   alert('Please accept the terms and conditions');
+    //   return;
+    // }
 
-    setLoading(true);
-    try {
-      const registerData = {
-        full_name: formData.fullName,
-        username: formData.username,
-        email: formData.email,
-        phone_number: formData.phoneNumber,
-        password: formData.password,
-        roll_number: formData.rollNumber,
-        department: formData.department,
-        degree: formData.degree,
-        batch_starting_year: parseInt(formData.batchStartingYear),
-        batch_ending_year: parseInt(formData.batchEndingYear),
-        occupation: formData.occupation || null,
-        company: formData.company || null
-      };
+    // setLoading(true);
+    // try {
+    //   const registerData = {
+    //     full_name: formData.fullName,
+    //     username: formData.username,
+    //     email: formData.email,
+    //     phone_number: formData.phoneNumber,
+    //     password: formData.password,
+    //     roll_number: formData.rollNumber,
+    //     department: formData.department,
+    //     degree: formData.degree,
+    //     batch_starting_year: parseInt(formData.batchStartingYear),
+    //     batch_ending_year: parseInt(formData.batchEndingYear),
+    //     occupation: formData.occupation || null,
+    //     company: formData.company || null
+    //   };
 
-      console.log('Register data:', registerData);
-      const response = await axios.post(`${API_BASE_URL}/auth/register`, registerData);
-      console.log('Registration response:', response.data);
-      alert('Registration submitted successfully!');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error registering:', error);
-      if (error.response) {
-        console.log('Error response:', error.response.data);
-        alert(error.response.data?.detail || 'Registration failed');
-      } else {
-        alert('Registration failed. Please try again.');
-      }
-    } finally {
-      setLoading(false);
-    }
+    //   console.log('Register data:', registerData);
+    //   const response = await axios.post(`${API_BASE_URL}/auth/register`, registerData);
+    //   console.log('Registration response:', response.data);
+    //   alert('Registration submitted successfully!');
+    //   navigate('/login');
+    // } catch (error) {
+    //   console.error('Error registering:', error);
+    //   if (error.response) {
+    //     console.log('Error response:', error.response.data);
+    //     alert(error.response.data?.detail || 'Registration failed');
+    //   } else {
+    //     alert('Registration failed. Please try again.');
+    //   }
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
   const departments = [
@@ -357,7 +358,7 @@ const Register = () => {
                   />
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Full Name */}
                 <div>
@@ -386,7 +387,7 @@ const Register = () => {
                     required
                   />
                 </div>
-                
+
                 {/* Password */}
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Password *</label>
@@ -459,11 +460,10 @@ const Register = () => {
                         type="button"
                         onClick={handleSendOtp}
                         disabled={isOtpSent || !formData.phoneNumber || formData.phoneNumber.length !== 10 || loading}
-                        className={`px-3 py-2 rounded-sm font-medium transition-all duration-200 whitespace-nowrap ${
-                          isOtpSent || !formData.phoneNumber || formData.phoneNumber.length !== 10 || loading
-                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow'
-                        }`}
+                        className={`px-3 py-2 rounded-sm font-medium transition-all duration-200 whitespace-nowrap ${isOtpSent || !formData.phoneNumber || formData.phoneNumber.length !== 10 || loading
+                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                          : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow'
+                          }`}
                       >
                         Send OTP
                       </button>
@@ -497,11 +497,10 @@ const Register = () => {
                         type="button"
                         onClick={handleSendEmailOtp}
                         disabled={isEmailOtpSent || !formData.email || loading}
-                        className={`px-3 py-2 rounded-sm font-medium transition-all duration-200 whitespace-nowrap ${
-                          isEmailOtpSent || !formData.email || loading
-                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow'
-                        }`}
+                        className={`px-3 py-2 rounded-sm font-medium transition-all duration-200 whitespace-nowrap ${isEmailOtpSent || !formData.email || loading
+                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                          : 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm hover:shadow'
+                          }`}
                       >
                         Send OTP
                       </button>
@@ -535,27 +534,25 @@ const Register = () => {
                         type="button"
                         onClick={handleVerifyOtp}
                         disabled={!formData.otp || formData.otp.length !== 6 || loading}
-                        className={`px-3 py-2 rounded-sm font-medium transition-all duration-200 whitespace-nowrap ${
-                          !formData.otp || formData.otp.length !== 6 || loading
-                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            : 'bg-green-600 text-white hover:bg-green-700 shadow-sm hover:shadow'
-                        }`}
+                        className={`px-3 py-2 rounded-sm font-medium transition-all duration-200 whitespace-nowrap ${!formData.otp || formData.otp.length !== 6 || loading
+                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                          : 'bg-green-600 text-white hover:bg-green-700 shadow-sm hover:shadow'
+                          }`}
                       >
                         Verify OTP
                       </button>
                     </div>
-                    
+
                     {/* Resend Section */}
                     <div className="flex items-center justify-between mt-2">
                       <button
                         type="button"
                         onClick={handleResendOtp}
                         disabled={resendTimer > 0 || loading}
-                        className={`text-sm font-medium transition-all duration-200 ${
-                          resendTimer > 0 || loading
-                            ? 'text-gray-400 cursor-not-allowed'
-                            : 'text-blue-600 hover:text-blue-700 hover:underline'
-                        }`}
+                        className={`text-sm font-medium transition-all duration-200 ${resendTimer > 0 || loading
+                          ? 'text-gray-400 cursor-not-allowed'
+                          : 'text-blue-600 hover:text-blue-700 hover:underline'
+                          }`}
                       >
                         {resendTimer > 0 ? `Resend available in ${resendTimer}s` : 'Resend OTP'}
                       </button>
@@ -591,27 +588,25 @@ const Register = () => {
                         type="button"
                         onClick={handleVerifyEmailOtp}
                         disabled={!formData.emailOtp || formData.emailOtp.length !== 6 || loading}
-                        className={`px-3 py-2 rounded-sm font-medium transition-all duration-200 whitespace-nowrap ${
-                          !formData.emailOtp || formData.emailOtp.length !== 6 || loading
-                            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                            : 'bg-green-600 text-white hover:bg-green-700 shadow-sm hover:shadow'
-                        }`}
+                        className={`px-3 py-2 rounded-sm font-medium transition-all duration-200 whitespace-nowrap ${!formData.emailOtp || formData.emailOtp.length !== 6 || loading
+                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                          : 'bg-green-600 text-white hover:bg-green-700 shadow-sm hover:shadow'
+                          }`}
                       >
                         Verify OTP
                       </button>
                     </div>
-                    
+
                     {/* Resend Section */}
                     <div className="flex items-center justify-between mt-2">
                       <button
                         type="button"
                         onClick={handleResendEmailOtp}
                         disabled={emailResendTimer > 0 || loading}
-                        className={`text-sm font-medium transition-all duration-200 ${
-                          emailResendTimer > 0 || loading
-                            ? 'text-gray-400 cursor-not-allowed'
-                            : 'text-blue-600 hover:text-blue-700 hover:underline'
-                        }`}
+                        className={`text-sm font-medium transition-all duration-200 ${emailResendTimer > 0 || loading
+                          ? 'text-gray-400 cursor-not-allowed'
+                          : 'text-blue-600 hover:text-blue-700 hover:underline'
+                          }`}
                       >
                         {emailResendTimer > 0 ? `Resend available in ${emailResendTimer}s` : 'Resend OTP'}
                       </button>
@@ -738,7 +733,7 @@ const Register = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={loading || !isPhoneVerified || !isEmailVerified}
+              disabled={loading}
               className="w-full bg-amber-400 hover:bg-amber-400 text-black font-semibold py-3 px-6 rounded-md transition duration-200 transform hover:scale-[1.02] shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Submitting...' : 'Submit Registration'}

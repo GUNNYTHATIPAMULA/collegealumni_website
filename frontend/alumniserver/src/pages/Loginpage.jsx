@@ -6,10 +6,10 @@ const Loginpage = () => {
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 border border-slate-200">
         <div className="text-center mb-8">
-           <h2 className="text-3xl font-black text-blue-900">WELCOME BACK</h2>
-           <p className="text-slate-500 font-medium">TKR Alumni Portal</p>
+          <h2 className="text-3xl font-black text-blue-900">WELCOME BACK</h2>
+          <p className="text-slate-500 font-medium">TKR Alumni Portal</p>
         </div>
-        
+
         <div className="space-y-5">
           <div>
             <label className="block text-xs font-bold text-slate-700 uppercase mb-2">Username or Email</label>
@@ -28,7 +28,7 @@ const Loginpage = () => {
             <a href="#" className="text-blue-800 font-bold">Forgot?</a>
           </div>
 
-          <button className="w-full bg-blue-900 text-white font-bold py-4 rounded-2xl shadow-blue-200 shadow-lg hover:bg-blue-800 transition transform hover:scale-[1.02]">
+          <button onClick={() => { navigate("/alumnidashboard") }} className="w-full bg-blue-900 text-white font-bold py-4 rounded-2xl shadow-blue-200 shadow-lg hover:bg-blue-800 transition transform hover:scale-[1.02]">
             Sign In
           </button>
 
@@ -38,7 +38,7 @@ const Loginpage = () => {
             <div className="flex-grow border-t border-slate-200"></div>
           </div>
 
-          <button onClick={()=>navigate("/register")} className="w-full border-2 border-blue-900 text-blue-900 font-bold py-4 rounded-2xl hover:bg-blue-50 transition">
+          <button onClick={() => navigate("/register")} className="w-full border-2 border-blue-900 text-blue-900 font-bold py-4 rounded-2xl hover:bg-blue-50 transition">
             Create Alumni Account
           </button>
         </div>
@@ -51,4 +51,3 @@ export default Loginpage
 
 
 
-   

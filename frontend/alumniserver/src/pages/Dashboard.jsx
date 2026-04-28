@@ -35,18 +35,7 @@ const Dashboard = () => {
     { name: 'Raduat Manager', achievement: 'Published bestselling book on leadership', year: '2024' },
   ];
 
-  // Calendar days for March 2026 (simulated)
-  const calendarDays = [
-    { day: 30, month: 'Mar' }, { day: 31, month: 'Mar' }, { day: 1, month: 'Apr' }, { day: 2, month: 'Apr' },
-    { day: 3, month: 'Apr' }, { day: 4, month: 'Apr' }, { day: 5, month: 'Apr' }, { day: 6, month: 'Apr' },
-    { day: 7, month: 'Apr' }, { day: 8, month: 'Apr' }, { day: 9, month: 'Apr' }, { day: 10, month: 'Apr' },
-    { day: 11, month: 'Apr' }, { day: 12, month: 'Apr' }, { day: 13, month: 'Apr' }, { day: 14, month: 'Apr' },
-    { day: 15, month: 'Apr' }, { day: 16, month: 'Apr' }, { day: 17, month: 'Apr' }, { day: 18, month: 'Apr' },
-    { day: 19, month: 'Apr' }, { day: 20, month: 'Apr' }, { day: 21, month: 'Apr' }, { day: 22, month: 'Apr' },
-    { day: 23, month: 'Apr' }, { day: 24, month: 'Apr' }, { day: 25, month: 'Apr' }, { day: 26, month: 'Apr' },
-    { day: 27, month: 'Apr' }, { day: 28, month: 'Apr' }, { day: 29, month: 'Apr' }, { day: 30, month: 'Apr' },
-    { day: 1, month: 'May' }, { day: 2, month: 'May' }, { day: 3, month: 'May' }, { day: 4, month: 'May' },
-  ];
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br p-5 from-gray-50 to-gray-100">
@@ -138,8 +127,8 @@ const Dashboard = () => {
                 <p className=" text-sm mb-4">Access exclusive alumni resources and networking events.</p>
                 <div className="flex space-x-3">
                   <button
-                  onClick={()=>navigate("/login")}
-                  className="bg-blue-900 text-indigo-600 text-white px-4 py-2 rounded-sm font-medium text-sm hover:bg-blue-800 transition-colors">
+                    onClick={() => navigate("/login")}
+                    className="bg-blue-900 text-indigo-600 text-white px-4 py-2 rounded-sm font-medium text-sm hover:bg-blue-800 transition-colors">
                     Login
                   </button>
                   <button onClick={() => navigate('/register')}
