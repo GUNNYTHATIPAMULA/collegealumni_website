@@ -29,7 +29,7 @@ const SideBar = () => {
     alumni: [
       { icon: Home, label: 'Dashboard', href: '/alumnidashboard' },
       { icon: User, label: 'My Profile', href: '/profile' },
-      { icon: Users, label: 'Alumni Directory', href: '/allalumni' },
+      { icon: Users, label: 'Alumni Directory', href: '/alumnidashboard/allalumnis' },
       { icon: Briefcase, label: 'Job Portal', href: '/jobs' },
       { icon: GraduationCap, label: 'Mentorship', href: '/mentorship' },
       { icon: FileText, label: 'Career Resources', href: '/resources' },
