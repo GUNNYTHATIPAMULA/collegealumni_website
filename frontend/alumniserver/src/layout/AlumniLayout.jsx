@@ -5,6 +5,9 @@ import SideBar from '../components/SideBar'
 
 const AlumniLayout = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const user = {
+    role: "alumni"
+  }
 
   return (
     <div className='min-h-screen'>
@@ -30,7 +33,7 @@ const AlumniLayout = () => {
             md:translate-x-0
           `}
       >
-        <SideBar />
+        <SideBar user={user} />
 
       </div>
       <div className="flex pt-16">
@@ -39,7 +42,7 @@ const AlumniLayout = () => {
         {/* Main Content */}
         <div
           className={`
-            flex-1 p-4 transition-all duration-300
+            flex-1 md:p-4 p-2 transition-all duration-300
             md:ml-64
           `}
         >

@@ -64,8 +64,8 @@ const Alumni_Dashboard = () => {
     const today = 17;
 
     return (
-        <div className="min-h-screen bg-slate-50">
-            <main className="container mx-auto px-4  max-w-7xl">
+        <div className="min-h-screen ">
+            <main className="container mx-auto md:px-4 px-1  max-w-7xl">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     {/* LEFT + CENTER */}
                     <div className="lg:col-span-2 space-y-6">
