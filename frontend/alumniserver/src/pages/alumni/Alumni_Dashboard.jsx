@@ -70,7 +70,7 @@ const Alumni_Dashboard = () => {
                     {/* LEFT + CENTER */}
                     <div className="lg:col-span-2 space-y-6">
                         {/* Welcome banner */}
-                        <section className="rounded-2xl p-6 text-white shadow-sm bg-gradient-to-br from-blue-900 to-blue-900">
+                        <section className="rounded-2xl md:p-6 py-4 px-2 text-white shadow-sm bg-gradient-to-br from-blue-900 to-blue-900">
                             <div className="flex items-center gap-4">
                                 <div className="h-16 w-16 rounded-full ring-2  bg-white/20 flex items-center justify-center">
                                     <span className="text-2xl font-bold">👤</span>
@@ -92,7 +92,7 @@ const Alumni_Dashboard = () => {
                                 </div>
                             </div>
                         </section>
-                        <section className="bg-white rounded-md p-6 shadow-sm">
+                        <section className="bg-white rounded-md md:p-6  p-3 shadow-sm">
                             <div className="flex items-center justify-between mb-4">
                                 <h2 className="text-xl font-bold text-slate-900">
                                     Featured Gallery
@@ -122,7 +122,7 @@ const Alumni_Dashboard = () => {
                         {/* Two-col: Alumni list + Events */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* All Alumni */}
-                            <section className="bg-white rounded-md p-6 shadow-md flex flex-col">
+                            <section className="bg-white rounded-md md:p-6 py-2 px-4 shadow-md flex flex-col">
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-xl font-bold text-slate-900">
                                         All Alumni
@@ -205,7 +205,7 @@ const Alumni_Dashboard = () => {
                             </section>
 
                             {/* Upcoming Events */}
-                            <section className="bg-white rounded-md p-6 shadow-sm">
+                            <section className="bg-white rounded-md md:p-6 py-2 px-4 shadow-sm">
                                 <div className="flex items-center justify-between mb-4">
                                     <h2 className="text-xl font-bold text-slate-900">
                                         Upcoming Events
